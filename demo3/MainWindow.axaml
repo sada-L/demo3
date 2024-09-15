@@ -1,0 +1,88 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="demo3.MainWindow"
+		x:CompileBindings="False"
+        Title="demo3">
+	<Grid RowDefinitions="Auto, *, Auto"
+		  ColumnDefinitions="*,*,*">
+		<TextBox Name="SearchTextBox"
+				Grid.Row="0"
+				Grid.Column="0" 
+				Watermark="Поиск"
+				Margin="10"
+				TextChanged="TextBox_TextChanged"/>
+
+		<ComboBox Name="FilterComboBox"
+				  Grid.Row="0"
+				  Grid.Column="1"
+				  HorizontalAlignment="Stretch"
+				  Margin="10"
+				  SelectionChanged="ComboBox_SelectionChanged">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<ComboBox Name="SortComboBox"
+				  Grid.Row="0"
+				  Grid.Column="2"
+				  HorizontalAlignment="Stretch"
+				  Margin="10"
+				  SelectedIndex="0"
+				  SelectionChanged="ComboBox_SelectionChanged">
+			<ComboBoxItem Content="Все"/>
+			<ComboBoxItem Content="По имени \/"/>
+			<ComboBoxItem Content="По имени /\"/>
+			<ComboBoxItem Content="По скидке \/"/>
+			<ComboBoxItem Content="По скидке /\"/>
+			<ComboBoxItem Content="По приорите \/"/>
+			<ComboBoxItem Content="По приорите /\"/>
+		</ComboBox> 
+
+		<Button Grid.Column="0"
+				Grid.Row="2"
+				Margin="10"
+				Content="Добавить"
+				Click="Button_Click_Add"/>
+
+		<ListBox Name="AgentListBox"
+				 Grid.Row="1"
+				 Grid.ColumnSpan="3"
+				 Margin="10">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border BorderBrush="Black"
+							BorderThickness="1"
+							Margin="10"
+							Background="{Binding Color}"
+							DoubleTapped="Border_DoubleTapped">
+						<Grid ColumnDefinitions="Auto, *, Auto">
+							<Image Source="{Binding Image}" Grid.Column="0" Height="80"/>
+
+							<StackPanel Grid.Column="1" Spacing="5" Margin="10">
+								<TextBlock>
+									<TextBlock.Text>
+										<MultiBinding StringFormat="{}{0} | {1}">
+											<Binding Path="Type.Name"/>
+											<Binding Path="Name"/>
+										</MultiBinding>
+									</TextBlock.Text>
+								</TextBlock>
+								<TextBlock Text="{Binding CountOfSells, StringFormat='{}{0} продаж за год'}"/>
+								<TextBlock Text="{Binding Phone}"/>
+								<TextBlock Text="{Binding Priority, StringFormat='Приоритетность: {0}'}"/>
+							</StackPanel>
+
+							<TextBlock Text="{Binding Discount, StringFormat='{}{0}%'}" Grid.Column="2" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</Grid>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
+</Window>

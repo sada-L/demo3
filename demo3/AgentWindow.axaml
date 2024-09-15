@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="demo3.AgentWindow"
+		x:CompileBindings="False"
+        Title="AgentWindow">
+	<Grid RowDefinitions="*, Auto"
+		  ColumnDefinitions="*,*">
+		<StackPanel Grid.Row="0"
+					Grid.Column="0"
+					Name="AgentPanel"
+					Spacing="10"
+					Margin="10">
+			<TextBox Watermark="Имя" Text="{Binding Name}"/>
+			<TextBox Watermark="Приоритет" Text="{Binding Priority}"/>
+			<TextBox Watermark="Адрес" Text="{Binding Address }"/>
+			<TextBox Watermark="ИНН" Text="{Binding Inn}"/>
+			<TextBox Watermark="КПП" Text="{Binding Kpp}"/>
+			<TextBox Watermark="Имя директора" Text="{Binding Dirname}"/>
+			<TextBox Watermark="Телефон" Text="{Binding Phone}"/>
+			<TextBox Watermark="Почта" Text="{Binding Agentid}"/>
+
+			<ComboBox Name="AgentTypeComboBox">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+			
+			<Image Source="{Binding Image}" Width="200"/>
+		</StackPanel>
+
+		<ListBox Name="SaleListBox"
+				 Margin="10"
+				 Grid.Row="0"
+				 Grid.Column="1">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal"
+								Spacing="10"
+								Margin="10">
+						<TextBlock Text="{Binding Saledate}"/>
+						<TextBlock Text="{Binding CountOfProduct}"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		
+		<Button Content="Назад"
+				Grid.Column="0"
+				Grid.Row="1"
+				Margin="10"
+				Click="Button_Click_Back"/>
+	</Grid>
+</Window>
